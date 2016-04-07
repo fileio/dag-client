@@ -1,0 +1,11 @@
+defaults: &defaults
+  analysis_api: 'https://analysis-dag.iijgio.com'
+  storage_api: 'https://storage-dag.iijgio.com'
+  force_path_style: false
+  debug: false
+
+test:
+  <<: *defaults
+  analysis_api: 'http://localhost:9393'
+  storage_api: 'http://localhost:9292'
+  force_path_style: true
