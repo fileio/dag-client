@@ -51,6 +51,14 @@ class Object extends Model
         return $this->api->objectGet($this->bucket_name, $this->name, $range);
     }
 
+    public function head()
+    {
+        $response = $this->api->objectHead($this->bucket_name, $this->name);
+        $json = json_encode($response);
+        $array = json_decode($json, TRUE);
+        return $array['headers'];
+    }
+
     public function delete()
     {
         return $this->api->objectDelete($this->bucket_name, $this->name);

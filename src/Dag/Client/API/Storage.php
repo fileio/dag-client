@@ -132,6 +132,14 @@ trait Storage
             error_log("{$object}\n");
         }
     }
+
+    public function objectHead($bucket, $object)
+    {
+        $resource = "/{$object}";
+        $headers = [];
+        $params = ['bucket' => $bucket, 'headers' => $headers];
+        return $this->execute(@STORAGE, new RestParameter('head', $resource, $params));
+    }
 }
 
 /**
