@@ -5,14 +5,18 @@ namespace Gio\IijDagClient;
 require_once dirname(__FILE__) . "/../vendor/autoload.php";
 
 use Gio\IijDagClient\NotImplementedException;
+use Gio\IijDagClient\Jobs\TmpCleanJob;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Config;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 
 class DagAdapter extends AbstractAdapter
 {
+    use DispatchesJobs;
+
     private $client;
     private $bucket;
 
@@ -242,8 +246,8 @@ class DagAdapter extends AbstractAdapter
      */
     public function readStream($path)
     {
-        //TODO make this async
-        $this->deleteTmp(60);
+        $job = new TmpCleanJob();
+        $this->dispatch($job);
 
         $size = $this->getSize($path);
         $object = $this->bucket->object($path);
@@ -327,7 +331,7 @@ class DagAdapter extends AbstractAdapter
      * sec で指定されたものよりも古いファイルを削除する
      * @param $sec
      */
-    private function deleteTmp($sec)
+    public function deleteTmp($sec)
     {
         $files = Storage::disk('local')->allFiles('chunk_tmp/projects');
         foreach ($files as $file)
