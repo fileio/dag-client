@@ -24,6 +24,15 @@ class Object extends Model
         $this->opts = $opts;
     }
 
+    public function writeStream($resource, array $params = [])
+    {
+        if (!is_resource($resource)) {
+            throw new Client\Exception\MissingFileException();
+        }
+        $data = $resource;
+        return $this->upload($params, $data);
+    }
+
     public function write($data, array $params = [])
     {
         if(file_exists($data)) {
@@ -34,7 +43,21 @@ class Object extends Model
             rewind($fp);
             $data = $fp;
         }
+        return $this->upload($params, $data);
+    }
 
+    public function read($range = null)
+    {
+        return $this->api->objectGet($this->bucket_name, $this->name, $range);
+    }
+
+    public function delete()
+    {
+        return $this->api->objectDelete($this->bucket_name, $this->name);
+    }
+
+    private function upload($params, $data)
+    {
         try {
             if (array_key_exists('multipart', $params)) {
                 $this->api->objectCreateMultipart($this->bucket_name, $this->name, $params, function() use ($data) {
@@ -48,15 +71,7 @@ class Object extends Model
         } finally {
             if(is_resource($data)) fclose($data);
         }
-    }
 
-    public function read($range = null)
-    {
-        return $this->api->objectGet($this->bucket_name, $this->name, $range);
-    }
-
-    public function delete()
-    {
-        return $this->api->objectDelete($this->bucket_name, $this->name);
+        return true;
     }
 }
