@@ -101,6 +101,8 @@ class API implements APIInterface
                 return $data;
             }
         }
+
+        throw new APIFailure();
     }
 
     public function downloadSignature($expire_at, $bucket, $output_object)
@@ -134,6 +136,10 @@ class API implements APIInterface
             $api_failure = new APIFailure($msg);
 
             if (!$e->hasResponse()) {
+                throw $api_failure;
+            }
+
+            if ($e->getResponse()->getBody() == null) {
                 throw $api_failure;
             }
 
@@ -215,6 +221,9 @@ class API implements APIInterface
 
             case "delete":
                 return $this->client->delete($url, $default);
+
+            case "head":
+                return $this->client->head($url, $default);
 
         }
     }
