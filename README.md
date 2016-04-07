@@ -33,7 +33,7 @@ Add `dag` directive to `config/filesystems.php` under `disks`
 Register provider in `config/app.php` under providers
 
 ```
-Gio\IijDagClient\Providers\GioServiceProvider::class,
+Gio\IijDagClient\Providers\GioServiceProvider::class
 ```
 
 Register Facade in `config/app.php` under aliases
