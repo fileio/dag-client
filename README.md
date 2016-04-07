@@ -1,5 +1,7 @@
 # IIJ GIO Dag Client
 
+Laravel package of Gio Dag client
+
 # Install
 
 Add following line to your composer.json
