@@ -4,7 +4,7 @@ namespace Gio\IijDagClient;
 
 require_once dirname(__FILE__) . "/iij-dag-client/vendor/autoload.php";
 
-use App\Exceptions\NotImplementedException;
+use Gio\IijDagClient\NotImplementedException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
