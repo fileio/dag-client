@@ -33,11 +33,24 @@ Add `dag` directive to `config/filesystems.php` under `disks`
 Register provider in `config/app.php` under providers
 
 ```
-\Gio\IijDagClient\Providers\GioServiceProvider::class,
+Gio\IijDagClient\Providers\GioServiceProvider::class,
 ```
 
 Register Facade in `config/app.php` under aliases
 
 ```
 Gio\IijDagClient\Facade\GioIijDagClient::class
+```
+
+# Multipart file download
+
+```
+GioIijDagClient::readStreamAsync($path,
+    function($data) {
+        // called everytime data is downloaded from dag
+    },
+    function() use (&$finished) {
+        // called when download finishes
+    }
+);
 ```

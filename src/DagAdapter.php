@@ -2,7 +2,7 @@
 
 namespace Gio\IijDagClient;
 
-require_once dirname(__FILE__) . "/iij-dag-client/vendor/autoload.php";
+require_once dirname(__FILE__) . "/../vendor/autoload.php";
 
 use Gio\IijDagClient\NotImplementedException;
 use Carbon\Carbon;
