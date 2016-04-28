@@ -18,7 +18,7 @@ Add following line to your composer.json
 Then require library
 
 ```
-$ composer require gio/iij-dag-client:0.0.1
+$ composer require gio/iij-dag-client:0.0.2
 ```
 
 # Setup
