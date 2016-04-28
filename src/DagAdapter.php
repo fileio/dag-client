@@ -94,7 +94,7 @@ class DagAdapter extends AbstractAdapter
      */
     public function update($path, $contents, Config $config)
     {
-        throw new NotImplementedException();
+        return $this->write($path, $contents, $config);
     }
 
     /**
@@ -109,7 +109,7 @@ class DagAdapter extends AbstractAdapter
      */
     public function updateStream($path, $resource, Config $config)
     {
-        throw new NotImplementedException();
+        return $this->writeStream($path, $resource, $config);
     }
 
     /**
@@ -178,7 +178,7 @@ class DagAdapter extends AbstractAdapter
     public function createDir($dirname, Config $config)
     {
         $object = $this->bucket->object($dirname . '/.keep');
-        return $object->write(storage_path('app/.keep'));
+        return $object->write(base_path('vendor/gio/iij-dag-client/resource/.keep'));
     }
 
     /**
