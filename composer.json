@@ -1,5 +1,5 @@
 {
-    "name": "gio/iij-dag-client",
+    "name": "fileio/dag-client",
     "description": "iij gio dag client for laravel5",
     "authors": [
         {
