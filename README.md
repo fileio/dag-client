@@ -1,24 +1,13 @@
-# IIJ GIO Dag Client
+# GIO Dag Client
 
 Laravel package of Gio Dag client
 
 # Install
 
-Add following line to your composer.json
+Require library
 
 ```
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "git@komugi-gitlab.info:gio/iij-dag-client.git"
-    }
-]
-```
-
-Then require library
-
-```
-$ composer require gio/iij-dag-client:0.0.2
+$ composer require fileio/dag-client:0.0.1
 ```
 
 # Setup
@@ -43,7 +32,7 @@ Gio\IijDagClient\Providers\GioServiceProvider::class
 Register Facade in `config/app.php` under aliases
 
 ```
-Gio\IijDagClient\Facade\GioIijDagClient::class
+'GioIijDagClient' => Gio\IijDagClient\Facade\GioIijDagClient::class
 ```
 
 # Multipart file download
