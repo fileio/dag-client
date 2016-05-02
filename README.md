@@ -1,6 +1,6 @@
 # GIO Dag Client
 
-Laravel package of Gio Dag client
+Laravel package of Gio Dag client (http://docs.dag.iijgio.com/analysis/library/php.html)
 
 # Install
 
