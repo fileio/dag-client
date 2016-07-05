@@ -271,7 +271,7 @@ class DagAdapter extends AbstractAdapter
             while($currentPosition <= $size)
             {
                 // range get of object data
-                $data = $object->read([$currentPosition, $chunkSize]);
+                $data = $object->read([$currentPosition, $currentPosition + $chunkSize]);
 
                 // $data を tmp file に書き込む
                 fwrite($fp, $data);
