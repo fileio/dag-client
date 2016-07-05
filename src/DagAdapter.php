@@ -236,7 +236,9 @@ class DagAdapter extends AbstractAdapter
     public function read($path)
     {
         $object = $this->bucket->object($path);
-        return $object->read();
+        return [
+            'contents' => $object->read(),
+        ];
     }
 
     /**
