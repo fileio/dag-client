@@ -433,20 +433,23 @@ class DagAdapter extends AbstractAdapter
         throw new NotImplementedException();
     }
 
-    public function createDownloadUrl($expire, $bucket, $path, $accessSecret, $accessKey)
+    public function createDownloadUrl($expire, $bucket, $path, $accessSecret, $accessKey, $resourceName)
     {
+        $responseContentDisposition = 'attachment; filename*=UTF-8\'\'' . $resourceName;
+        $encodedResponseContentDisposition = rawurlencode($responseContentDisposition);
+
         $rowSignature = "GET\n" .
             "\n" .
             "\n" .
             $expire . "\n" .
-            "/" . $bucket . "/" . $path;
+            "/" . $bucket . "/" . $path . '?response-content-disposition=' . $responseContentDisposition;
 
         $utf8 = mb_convert_encoding($rowSignature, "UTF-8", "auto");
         $encrypted = hash_hmac('sha1', $utf8, $accessSecret, TRUE);
         $base64 = base64_encode($encrypted);
         $signature = urlencode($base64);
 
-        $url = 'https://' . $bucket . '.storage-dag.iijgio.com/' . $path . '?Expires=' . $expire . '&IIJGIOAccessKeyId=' . $accessKey . '&Signature=' . $signature;
+        $url = 'https://' . $bucket . '.storage-dag.iijgio.com/' . $path . '?response-content-disposition=' . $encodedResponseContentDisposition . '&Expires=' . $expire . '&IIJGIOAccessKeyId=' . $accessKey . '&Signature=' . $signature;
 
         return [
             'url' => $url,
