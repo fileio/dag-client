@@ -433,6 +433,16 @@ class DagAdapter extends AbstractAdapter
         throw new NotImplementedException();
     }
 
+    /**
+     * ダウンロード可能な url を取得する
+     * @param $expire
+     * @param $bucket
+     * @param $path
+     * @param $accessSecret
+     * @param $accessKey
+     * @param $resourceName
+     * @return array
+     */
     public function createDownloadUrl($expire, $bucket, $path, $accessSecret, $accessKey, $resourceName)
     {
         $responseContentDisposition = 'attachment; filename*=UTF-8\'\'' . $resourceName;
@@ -449,7 +459,11 @@ class DagAdapter extends AbstractAdapter
         $base64 = base64_encode($encrypted);
         $signature = urlencode($base64);
 
-        $url = 'https://' . $bucket . '.storage-dag.iijgio.com/' . $path . '?response-content-disposition=' . $encodedResponseContentDisposition . '&Expires=' . $expire . '&IIJGIOAccessKeyId=' . $accessKey . '&Signature=' . $signature;
+        $url = 'https://' . $bucket . '.storage-dag.iijgio.com/' . $path .
+               '?response-content-disposition=' . $encodedResponseContentDisposition .
+               '&Expires=' . $expire .
+               '&IIJGIOAccessKeyId=' . $accessKey .
+               '&Signature=' . $signature;
 
         return [
             'url' => $url,
