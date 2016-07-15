@@ -7,7 +7,7 @@ Laravel package of Gio Dag client (http://docs.dag.iijgio.com/analysis/library/p
 Require library
 
 ```
-$ composer require fileio/dag-client:0.0.5
+$ composer require fileio/dag-client:0.0.6
 ```
 
 # Setup
