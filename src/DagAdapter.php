@@ -445,6 +445,9 @@ class DagAdapter extends AbstractAdapter
      */
     public function createDownloadUrl($expire, $bucket, $path, $accessSecret, $accessKey, $resourceName)
     {
+        $resourceName = rawurlencode($resourceName);
+        $path = str_replace('./', '', $path);
+
         $responseContentDisposition = 'attachment; filename*=UTF-8\'\'' . $resourceName;
         $encodedResponseContentDisposition = rawurlencode($responseContentDisposition);
 
